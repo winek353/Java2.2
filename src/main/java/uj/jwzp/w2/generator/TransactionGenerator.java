@@ -38,28 +38,4 @@ public class TransactionGenerator {
         }
         return sum;
     }
-
-//    private List<Item> generateItems(ProgramParameters programParameters){
-//        String csvFileName = "src\\main\\resources\\"+programParameters.itemsFileName;
-//        String line;
-//        String cvsSplitBy = ",";
-//        String [] lineElements;
-//        List<Item> items = new ArrayList<>();
-//
-//        try (BufferedReader br = new BufferedReader(new FileReader(csvFileName))) {
-//            int i=0;
-//            for(;i<programParameters.itemsCountRange.getValue0() && br.ready();i++){
-//                br.readLine();
-//            }
-//            for (;i<=programParameters.itemsCountRange.getValue1() && br.ready();i++){
-//                line = br.readLine();
-//                lineElements = line.split(cvsSplitBy);
-//                items.add(new Item(lineElements[0].replaceAll("\"", ""), randomService.getRandomInt(programParameters.itemsQuantityRange),
-//                        new BigDecimal(lineElements[1])) );
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return items;
-//    }
 }

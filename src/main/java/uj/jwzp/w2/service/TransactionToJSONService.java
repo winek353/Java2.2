@@ -14,7 +14,13 @@ public class TransactionToJSONService {
 
     public void createJSON( List<Transaction> transactionList,
                                       ProgramParameters programParameters) throws ParseException {
-        try (Writer writer = new FileWriter("transaction.json")) {
+        String outDirectory;
+        if(programParameters.getOutDir().equals(""))
+            outDirectory = "transaction.json";
+        else
+            outDirectory = programParameters.getOutDir() + "\\transaction.json";
+
+        try (Writer writer = new FileWriter(new File(outDirectory) )) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(transactionList, writer);
         } catch (IOException e) {
@@ -22,14 +28,4 @@ public class TransactionToJSONService {
         }
     }
 
-//    public void createJSON (ProgramParameters programParameters) throws ParseException {
-//        List<Transaction> transactionList = transactionGenerator.generateTrasactions(programParameters);
-//        Gson gson;
-//        try (Writer writer = new FileWriter("Output.json")) {
-//            gson = new GsonBuilder().setPrettyPrinting().create();
-//            gson.toJson(transactionList, writer);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

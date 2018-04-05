@@ -23,10 +23,6 @@ public class Transaction {
         return timestamp;
     }
 
-    public int getCustomer_id() {
-        return customer_id;
-    }
-
     public BigDecimal getSum() {
         return sum;
     }

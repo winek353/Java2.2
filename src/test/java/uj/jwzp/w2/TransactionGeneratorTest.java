@@ -38,46 +38,8 @@ public class TransactionGeneratorTest {
     @Rule
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
-//    @Test
-//    public void test () throws ParseException {//uniezależnić test od pliku .csv
-//        ProgramParameters programParameters = new ProgramParameters(
-//                new Pair<Integer, Integer>(1, 20),
-//                new Pair<String, String>("2018-03-08T00:00:00.000-0100", "2018-03-08T23:59:59.999-0100"),
-//                "items.csv",
-//                new Pair<Integer, Integer>(1, 1),
-//                new Pair<Integer, Integer>(1, 5),
-//                1,
-//                System.getProperty("user.dir")
-//        );
-//
-//        Mockito.when(randomService.getRandomInt(Mockito.any())).thenReturn(1);
-//        Mockito.when(randomService.getRandomTimeTimestamp(programParameters.getDateRange()))
-//                .thenReturn("2018-03-08T00:00:00.000-0100");
-//
-//        List<Item> items = new ArrayList<>();
-//        items.add(new Item("mleko 3% 1l", randomService.getRandomInt(programParameters.itemsQuantityRange),
-//                new BigDecimal("2.30")) );
-//        items.add(new Item("bułeczka", randomService.getRandomInt(programParameters.itemsQuantityRange),
-//                new BigDecimal("1.20")) );
-//
-//        Mockito.when(itemGenerator.generateItems(programParameters)).thenReturn(items);
-//
-//        TransactionGenerator transactionGenerator = new TransactionGenerator(randomService, itemGenerator);
-//        List<Transaction> transactionList = transactionGenerator.generateTrasactions(programParameters);
-//
-//        for (Transaction transaction: transactionList) {
-//            Assert.assertEquals(transaction.getTimestamp(),
-//                    randomService.getRandomTimeTimestamp(programParameters.getDateRange()));
-//
-//            for (Item item: items) {
-//                assertThat(transaction.getItems(), hasItems(
-//                        item
-//                ));
-//            }
-//        }
-//    }
     @Test
-    public void test2 () throws ParseException {//uniezależnić test od pliku .csv
+    public void correctValues () throws ParseException {
         ProgramParameters programParameters = new ProgramParameters(
                 new Pair<Integer, Integer>(1, 20),
                 new Pair<String, String>("2018-03-08T00:00:00.000-0100", "2018-03-08T23:59:59.999-0100"),

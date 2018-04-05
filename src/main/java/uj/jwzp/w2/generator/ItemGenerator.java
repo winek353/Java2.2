@@ -20,9 +20,6 @@ public class ItemGenerator {
         this.bufferedReaderService = bufferedReaderService;
     }
 
-//    public ItemGenerator(RandomService randomService) {
-//        this.randomService = randomService;
-//    }
 
     public List<Item> generateItems(ProgramParameters programParameters){
         String csvFileName = "src\\main\\resources\\"+programParameters.getItemsFileName();

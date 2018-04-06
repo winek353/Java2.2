@@ -4,6 +4,10 @@ import org.apache.commons.cli.*;
 import org.apache.commons.lang3.time.DateUtils;
 import org.javatuples.Pair;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -129,6 +133,7 @@ public class CLIParser {
                 map.put("eventsCount", "100");
             }
             if(cmd.hasOption("outDir")) {
+                createDirIfNotExists( (String) cmd.getParsedOptionValue("outDir"));
                 map.put("outDir",  (String) cmd.getParsedOptionValue("outDir"));
             }
             else {
@@ -137,4 +142,12 @@ public class CLIParser {
 
         return map;
     }
+    private void createDirIfNotExists(String dirName) throws IOException {
+        Path path = Paths.get(dirName);
+
+        if (!Files.exists(path)) {
+            Files.createDirectories(path);
+        }
+    }
+
 }

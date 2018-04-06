@@ -1,6 +1,7 @@
 package uj.jwzp.w2;
 
 import org.apache.commons.lang3.time.DateUtils;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -8,6 +9,11 @@ import org.junit.rules.ExpectedException;
 import uj.jwzp.w2.parser.CLIParser;
 import uj.jwzp.w2.parser.ProgramParameters;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,11 +22,21 @@ public class CLIParserTest {
     @Rule
     public final ExpectedException exception = ExpectedException.none();
 
+    String outputDirName = "shouldNotExists";
+
+    @After
+    public void deleteOutputFile() throws IOException {
+        Path path = Paths.get(outputDirName);
+        if (Files.exists(path)) {
+            Files.delete(path);
+        }
+    }
+
     @Test
     public void correctValues() throws Exception {
         String[] args = { "-customerIds", "1:20", "-dateRange",
                 "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",  "-itemsFile", "items.csv",
-                "-itemsCount", "5:15", "-itemsQuantity", "1:30", "-eventsCount", "1000", "-outDir", "./output"};
+                "-itemsCount", "5:15", "-itemsQuantity", "1:30", "-eventsCount", "1000", "-outDir", "./" + outputDirName};
 
         CLIParser cliParser = new CLIParser();
 
@@ -44,7 +60,7 @@ public class CLIParserTest {
 
         Assert.assertEquals(Integer.valueOf("1000"), programParameters.getEventsCount());
 
-        Assert.assertEquals("./output", programParameters.getOutDir());
+        Assert.assertEquals("./" + outputDirName, programParameters.getOutDir());
     }
 
     @Test
@@ -134,5 +150,21 @@ public class CLIParserTest {
 
         //when
         ProgramParameters programParameters = cliParser.getProgramParameters(args);
+    }
+
+    @Test
+    public void createOutputDir () throws Exception {
+        String[] args = { "-customerIds", "1:20", "-dateRange",
+                "2018-03-08T00:00:00.000-0100:2018-03-08T23:59:59.999-0100",  "-itemsFile", "items.csv",
+                "-itemsCount", "5:15", "-itemsQuantity", "1:30", "-eventsCount", "1000", "-outDir", "./" + outputDirName};
+
+        CLIParser cliParser = new CLIParser();
+
+        Path path = Paths.get(outputDirName);
+        //when
+        ProgramParameters programParameters = cliParser.getProgramParameters(args);
+
+        //then
+        Assert.assertTrue(Files.exists(path));
     }
 }
